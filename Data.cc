@@ -31,6 +31,12 @@ Data::Data(const std::string& filename) {
     file >> entries;
     m_data.push_back(entries);
   }
+  
+  for (int i = 0; i < size; ++i) {
+   double error;
+   file >> error;
+   m_errors.push_back(error);
+  }
 
   // done! close the file
   file.close();
