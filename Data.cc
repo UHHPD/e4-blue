@@ -4,6 +4,7 @@
 #include <fstream>
 #include <cassert>
 #include <stdexcept>
+#include <cmath>
 
 using namespace std;
 
@@ -45,3 +46,17 @@ Data::Data(const std::string& filename) {
 };
 
 void Data::assertSizes() { assert(m_data.size() + 1 == m_bins.size()); }
+
+int Data::checkCompatibility(const Data& in, int n) {
+  int counter = 0;
+  int size = in.size();
+  for (int i = 0; i < size; i++) {
+    double delta_mu = in.measurement(i) - m_data[i];
+    if(delta_mu < 0) {delta_mu *= -1;}
+    double sigma = sqrt(pow(in.error(i),2) + pow(m_errors[i],2)) * n;
+    if (delta_mu > sigma) {
+      counter++;
+    }
+  }
+  return counter;
+}

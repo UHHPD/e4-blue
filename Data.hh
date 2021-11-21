@@ -7,6 +7,7 @@
 class Data {
  public:
   Data(const std::string& filename);
+  int checkCompatibility(const Data& in, int n);
 
   unsigned int size() const { return m_data.size(); }
   double measurement(int i) const { return m_data[i]; }

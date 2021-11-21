@@ -2,6 +2,7 @@
 #include <vector>
 #include <functional>
 #include <string>
+#include <cmath>
 
 #include "Data.hh"
 
@@ -51,11 +52,18 @@ bool testCopyConstructor() {
          testEqual("measurement", 10., c.measurement(0));
 }
 
+bool testCheckCompatibility() {
+  std::cout << "testCheckCompatibility...";
+  Data a("testA");
+  Data b("testB");
+  return testEqual("compatibility",1,a.checkCompatibility(b,1)) && testEqual("compatibility",0,a.checkCompatibility(b,2));
+}
+
 void runTests() {
   std::cout << "running tests...\n";
   std::vector<std::function<bool()> > tests(
       {testReadingSize, testReadingMeasurement, testReadingBinEdges,
-       testReadingErrors, testCopyConstructor});
+       testReadingErrors, testCopyConstructor, testCheckCompatibility});
   for (auto test : tests)
     std::cout << (test() ? " ok" : " FAILED!") << std::endl;
 }
@@ -83,6 +91,17 @@ int main() {
        << endl;
     cout << "measurement of experiment " << i <<" in bin 27: " << data_sets[i].measurement(27)
        << endl;
+  }
+  
+  // check compatibility of bin 27 
+  int n = 1;
+  double delta_mu = data_sets[0].measurement(27) - data_sets[1].measurement(27);
+  if(delta_mu < 0) {delta_mu *= -1;}
+  double sigma = sqrt(pow(data_sets[0].error(27),2) + pow(data_sets[1].error(27),2)) * n;
+  if (delta_mu < sigma) {
+   cout << "data sets A and B compatible in bin 27" << endl;
+  } else {
+    cout << "data sets A and B not compatible in bin 27" << endl;
   }
   
   return 0;
