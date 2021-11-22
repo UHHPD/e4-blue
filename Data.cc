@@ -60,3 +60,25 @@ int Data::checkCompatibility(const Data& in, int n) {
   }
   return counter;
 }
+
+Data Data::operator+(const Data& in) {
+  Data avg(in);
+  int n = 3;
+  int c = this->checkCompatibility(in, n);
+  if(c > 0) {
+    cout << "data sets not compatible for n = " << n << " for " << c << "entries" << endl;
+  }
+  double w1;
+  double w2 = 0;
+  double y = 0;
+  double sigma_y = 0;
+  for(int i = 0; i < in.size(); i++) {
+    w1 = 1/pow(this->m_errors[i], 2);
+    w2 = 1/pow(in.error(i), 2);
+    y = (w1*this->m_data[i] + w2*in.measurement(i))/(w1 + w2);
+    sigma_y = sqrt(1/(w1 + w2));
+    avg.set_data(y, i);
+    avg.set_error(sigma_y, i);
+  }
+  return avg;
+}

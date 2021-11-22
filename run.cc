@@ -103,6 +103,7 @@ int main() {
   } else {
     cout << "data sets A and B not compatible in bin 27" << endl;
   }
+  Data sum = datA + datB;
   
   return 0;
 }
