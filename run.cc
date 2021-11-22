@@ -103,10 +103,20 @@ int main() {
   } else {
     cout << "data sets A and B not compatible in bin 27" << endl;
   }
-  Data sum = datA + datB;
-  cout << sum.error(0) << endl;
-  cout << sum.chi_square() << endl;
+  // Data sum = datA + datB;
+  // cout << sum.error(0) << endl;
+  // cout << sum.chi_square() << endl;
   
   // statistical analysis
+  // a) check compatibility
+  
+  // b) values of chi_square for individual model
+  for(int i = 0; i < 4; i++) {
+    cout << "chi square value for data set " << i << ": " << data_sets[i].chi_square() << endl;
+  }
+  
+  // c) value of chi_square for combined model
+  Data sum = datA + datB + datC + datD;
+  cout << "chi square value for combined data set: " << sum.chi_square() << endl;
   return 0;
 }
