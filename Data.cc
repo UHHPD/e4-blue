@@ -68,10 +68,7 @@ Data Data::operator+(const Data& in) {
   if(c > 0) {
     cout << "data sets not compatible for n = " << n << " for " << c << "entries" << endl;
   }
-  double w1;
-  double w2 = 0;
-  double y = 0;
-  double sigma_y = 0;
+  double w1, w2, y, sigma_y;
   for(int i = 0; i < in.size(); i++) {
     w1 = 1/pow(this->m_errors[i], 2);
     w2 = 1/pow(in.error(i), 2);
