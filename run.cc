@@ -104,6 +104,9 @@ int main() {
     cout << "data sets A and B not compatible in bin 27" << endl;
   }
   Data sum = datA + datB;
+  cout << sum.error(0) << endl;
+  cout << sum.chi_square() << endl;
   
+  // statistical analysis
   return 0;
 }

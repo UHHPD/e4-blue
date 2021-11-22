@@ -79,3 +79,19 @@ Data Data::operator+(const Data& in) {
   }
   return avg;
 }
+
+double background(double x) {
+  double alpha = 0.005;
+  double beta = -0.00001;
+  double gamma = 0.08;
+  double delta = 0.015;
+  return alpha + beta * x + gamma * exp(-delta * x);
+}
+
+double Data::chi_square() {
+  double chi = 0;
+  for (int i = 0; i < this->size(); i++) {
+    chi += pow(this->measurement(i) - background(this->binCenter(i)), 2)/pow(this->error(i), 2);
+  }
+  return chi/52;
+}
