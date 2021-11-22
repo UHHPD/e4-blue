@@ -81,10 +81,7 @@ Data Data::operator+(const Data& in) {
 }
 
 double background(double x) {
-  double alpha = 0.005;
-  double beta = -0.00001;
-  double gamma = 0.08;
-  double delta = 0.015;
+  double alpha = 0.005, beta = -0.00001, gamma = 0.08, delta = 0.015;
   return alpha + beta * x + gamma * exp(-delta * x);
 }
 

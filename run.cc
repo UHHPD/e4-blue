@@ -103,12 +103,19 @@ int main() {
   } else {
     cout << "data sets A and B not compatible in bin 27" << endl;
   }
-  // Data sum = datA + datB;
-  // cout << sum.error(0) << endl;
-  // cout << sum.chi_square() << endl;
   
   // statistical analysis
   // a) check compatibility
+  n = 2;
+  cout << datA.checkCompatibility(datB, n) << " data points from set A and B differ by more than " << n << " s.d." << endl;
+  cout << datA.checkCompatibility(datC, n) << " data points from set A and C differ by more than " << n << " s.d." << endl;
+  cout << datA.checkCompatibility(datD, n) << " data points from set A and D differ by more than " << n << " s.d." << endl;
+  n = 3;
+  cout << datA.checkCompatibility(datB, n) << " data points from set A and B differ by more than " << n << " s.d." << endl;
+  cout << datA.checkCompatibility(datC, n) << " data points from set A and C differ by more than " << n << " s.d." << endl;
+  cout << datA.checkCompatibility(datD, n) << " data points from set A and D differ by more than " << n << " s.d." << endl;
+
+  
   
   // b) values of chi_square for individual model
   for(int i = 0; i < 4; i++) {
